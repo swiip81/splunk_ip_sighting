@@ -1,0 +1,32 @@
+<form>
+  <label>_IP Sighting_</label>
+  <description>Fast observable sighting with Splunk</description>
+  <fieldset submitButton="true">
+    <input type="text" token="field1">
+      <label>CopyPast your text here (no quotes):</label>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>| inputlookup sighting_ip where [ | stats count | eval ips="$field1$" | eval ips=split(ips," ") | mvexpand ips | rex field=ips "([[ipv4]])" | fields - ips count | format "" "" "OR" "" "OR" "" | rex mode=sed field=search "s/ip/_key/g" ] | rename _key as ip
+| sort + first_seen
+| eval first_seen=strftime(first_seen, "%Y-%m-%dT%H:%M:%S%z"), last_seen=strftime(last_seen, "%Y-%m-%dT%H:%M:%S%z")
+| table ip,count,first_seen,last_seen</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>

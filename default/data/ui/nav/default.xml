@@ -1,0 +1,7 @@
+<nav search_view="search" color="#069ba5">
+  <view name="dashboards" default="true"/>
+  <view name="search"/>
+  <view name="reports"/>
+  <view name="alerts"/>
+  <view name="_ip_sighting_"/>
+</nav>

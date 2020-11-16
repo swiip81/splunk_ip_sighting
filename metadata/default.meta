@@ -1,0 +1,19 @@
+[]
+access = read : [ * ], write : [ admin ]
+export = none
+
+[transforms/sighting_ip]
+access = read : [ * ], write : [ admin ]
+export = system
+
+[savedsearches/Sighting_ip_src_update]
+access = read : [ admin ], write : [ admin ]
+export = none
+
+[savedsearches/Sighting_ip_dest_update]
+access = read : [ admin ], write : [ admin ]
+export = none
+
+[views/_ip_sighting_]
+access = read : [ * ], write : [ admin ]
+export = system
